@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #===============================================================================================
-#   frp a fast reverse proxy Installer Script
+#   frp a fast reverse proxy Installer Script (v2 - Corrected Checksum Logic)
 #
 #   - Fetches the latest version of frp for Linux based on system architecture.
 #   - Verifies the download with SHA256 checksum.
@@ -82,7 +82,9 @@ main() {
     # 3. Download and Verify
     FILENAME="frp_${LATEST_VERSION}_${OS}_${ARCH}.tar.gz"
     DOWNLOAD_URL="https://github.com/$REPO/releases/download/v${LATEST_VERSION}/${FILENAME}"
-    CHECKSUM_FILENAME="frp_${LATEST_VERSION}_checksums.txt"
+    
+    # --- FIX: Corrected the checksum filename ---
+    CHECKSUM_FILENAME="frp_sha256_checksums.txt"
     CHECKSUM_URL="https://github.com/$REPO/releases/download/v${LATEST_VERSION}/${CHECKSUM_FILENAME}"
     
     TMP_DIR="/tmp/frp_install"
@@ -137,7 +139,7 @@ webServer.password = "your_secure_password_here" # CHANGE THIS!
 transport.tls.force = true
 transport.tls.certFile = "$CONFIG_DIR/server.crt"
 transport.tls.keyFile = "$CONFIG_DIR/server.key"
-transport.tls.trustedCaFile = "$CONFIG_DIR/ca.crt"
+transport.tls.trustedCaFile = "$CONFIG_gdir/ca.crt"
 EOF
     fi
 
